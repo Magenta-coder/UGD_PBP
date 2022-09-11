@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ugd3_pbp.entity.obat
 
 
-class FragmentObat : Fragment() {
+class FragmentSearch : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,19 +20,17 @@ class FragmentObat : Fragment() {
         return inflater.inflate(R.layout.fragment_obat, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view : View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(context)
-        val adapter : RVObatAdapter = RVObatAdapter(obat.listofObat)
-
+        val adapter : RVObatAdapter = RVObatAdapter(obat.listOfObat)
 
         val rvObat : RecyclerView = view.findViewById(R.id.rv_obat)
-
         rvObat.layoutManager = layoutManager
-
         rvObat.setHasFixedSize(true)
+        rvObat.adapter=adapter
 
-        rvObat.adapter = adapter
 
     }
+
 }

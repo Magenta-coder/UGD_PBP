@@ -3,19 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Andro/Project_Apotek/app/src/main/res/layout/activity_home.xml" value="0.265625" />
-        <entry key="..\:/Andro/Project_Apotek/app/src/main/res/layout/activity_main.xml" value="0.265625" />
-        <entry key="..\:/Andro/Project_Apotek/app/src/main/res/layout/activity_register.xml" value="0.265625" />
-        <entry key="..\:/Andro/Project_Apotek/app/src/main/res/layout/fragment_dashboard.xml" value="0.265625" />
-        <entry key="..\:/Andro/Project_Apotek/app/src/main/res/layout/fragment_obat.xml" value="0.265625" />
-        <entry key="..\:/Andro/Project_Apotek/app/src/main/res/menu/menu.xml" value="0.265625" />
-        <entry key="..\:/UGD3_PBP/app/src/main/res/layout/activity_home.xml" value="0.22871376811594202" />
+        <entry key="..\:/UGD3_PBP/app/src/main/res/drawable-v24/ic_baseline_exit_to_app_24.xml" value="0.1" />
+        <entry key="..\:/UGD3_PBP/app/src/main/res/drawable-v24/ic_baseline_home_24.xml" value="0.1" />
+        <entry key="..\:/UGD3_PBP/app/src/main/res/drawable-v24/ic_baseline_medical_services_24.xml" value="0.1" />
+        <entry key="..\:/UGD3_PBP/app/src/main/res/drawable-v24/ic_baseline_search_24.xml" value="0.1" />
+        <entry key="..\:/UGD3_PBP/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/UGD3_PBP/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/UGD3_PBP/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/UGD3_PBP/app/src/main/res/layout/activity_register.xml" value="0.264" />
-        <entry key="..\:/UGD3_PBP/app/src/main/res/layout/fragment_dashboard.xml" value="0.2359375" />
+        <entry key="..\:/UGD3_PBP/app/src/main/res/layout/fragment_dashboard.xml" value="0.1803921568627451" />
         <entry key="..\:/UGD3_PBP/app/src/main/res/layout/fragment_obat.xml" value="0.264" />
-        <entry key="..\:/UGD3_PBP/app/src/main/res/layout/rv_item_obat.xml" value="0.4" />
-        <entry key="..\:/UGD3_PBP/app/src/main/res/menu/menu.xml" value="0.25" />
+        <entry key="..\:/UGD3_PBP/app/src/main/res/layout/rv_item_obat.xml" value="0.1" />
+        <entry key="..\:/UGD3_PBP/app/src/main/res/menu/menu.xml" value="0.1" />
       </map>
     </option>
   </component>
