@@ -43,12 +43,21 @@ class Register : AppCompatActivity() {
             var checkLogin = false
             val checkUsername: String = username.text.toString()
             val checkPassword: String = password.text.toString()
+            val checkPhoneNbr: String = phoneNumber.text.toString()
+            val checkDate: String = date.text.toString()
+
 
             if (checkUsername.isEmpty()){
                 username.setError("Username must be filled with text")
                 checkLogin = false
-            }else if (checkPassword.isEmpty()){
+            }else if (checkPassword.isEmpty()) {
                 password.setError("Password must be filled with text")
+                checkLogin = false
+            }else if (checkPhoneNbr.isEmpty()) {
+                phoneNumber.setError("Phone Number are required")
+                checkLogin = false
+            }else if(checkDate.isEmpty()) {
+                date.setError("Date must be filled")
                 checkLogin = false
             }else{
                 checkLogin = true
