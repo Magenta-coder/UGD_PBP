@@ -1,5 +1,7 @@
 package com.example.ugd3_pbp.entity
 
+import com.example.ugd3_pbp.R
+
 class obat (var name:String, var harga:Int,var gambar:Int)
 {
     companion object{

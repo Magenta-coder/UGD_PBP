@@ -12,7 +12,7 @@ class RVObatAdapter(private val data: Array<obat>) : RecyclerView.Adapter<RVObat
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.rv_item_medicine, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.rv_item_obat, parent, false)
         return viewHolder(itemView)
     }
 
