@@ -1,11 +1,14 @@
 package com.example.ugd3_pbp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.Button
+import com.example.ugd3_pbp.databinding.FragmentDashboardBinding
+import kotlinx.android.synthetic.*
 
 
 class FragmentHome : Fragment() {
@@ -18,9 +21,16 @@ class FragmentHome : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
-    }
+
+        val bind = FragmentDashboardBinding.inflate(layoutInflater)
+
+        bind.buttonObat.setOnClickListener {
+            val intent = Intent(this.requireContext(), TambahObat::class.java)
+            startActivity(intent)
+        }
+
+        return bind.root
+        }
 
 
 }
