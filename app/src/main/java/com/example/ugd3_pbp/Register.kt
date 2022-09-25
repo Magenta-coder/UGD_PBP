@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import com.example.ugd3_pbp.databinding.ActivityRegisterBinding
 import com.google.android.material.textfield.TextInputEditText
 
 class Register : AppCompatActivity() {
@@ -18,16 +19,18 @@ class Register : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+
+        val binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setTitle("User Register")
 
-        username = findViewById(R.id.username2)
-        password= findViewById(R.id.password2)
-        email = findViewById(R.id.email2)
-        date = findViewById(R.id.date2)
-        phoneNumber = findViewById(R.id.phone2)
-        btnRegis = findViewById(R.id.btnRegis)
+        username = binding.username2
+        password= binding.password2
+        email = binding.email2
+        date = binding.date2
+        phoneNumber = binding.phone2
+        btnRegis = binding.btnRegis
 
 
         val mBundle = Bundle()
