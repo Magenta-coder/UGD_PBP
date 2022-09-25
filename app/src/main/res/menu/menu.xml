@@ -11,6 +11,7 @@
         android:enabled="true"
         android:icon="@drawable/ic_baseline_medical_services_24"
         android:title="Medicine"/>
+
     <item
         android:id="@+id/logout"
         android:enabled="true"
