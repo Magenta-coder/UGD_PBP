@@ -22,11 +22,6 @@ class HomeActivity : AppCompatActivity() {
                 changeFragment(FragmentSearch())
                 true
             }
-
-            R.id.tambahobat -> {
-                changeFragment(FragmentTambahObat())
-                true
-            }
             R.id.logout -> {
                 val builder: AlertDialog.Builder = AlertDialog.Builder(this@HomeActivity)
                 builder.setMessage("Are you sure want to exit?")
