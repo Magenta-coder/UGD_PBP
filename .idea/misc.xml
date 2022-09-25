@@ -15,11 +15,17 @@
         <entry key="..\:/UGD3_PBP/app/src/main/res/layout/fragment_obat.xml" value="0.264" />
         <entry key="..\:/UGD3_PBP/app/src/main/res/layout/rv_item_obat.xml" value="0.1" />
         <entry key="..\:/UGD3_PBP/app/src/main/res/menu/menu.xml" value="0.1" />
+        <entry key="..\:/UGD_PBP/app/src/main/res/drawable-v24/ic_baseline_home_24.xml" value="0.1835" />
+        <entry key="..\:/UGD_PBP/app/src/main/res/drawable/ic_add.xml" value="0.1835" />
+        <entry key="..\:/UGD_PBP/app/src/main/res/drawable/ic_delete.xml" value="0.1835" />
+        <entry key="..\:/UGD_PBP/app/src/main/res/drawable/ic_edit.xml" value="0.1835" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/activity_splash_screen.xml" value="0.264" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/fragment_dashboard.xml" value="0.22826086956521738" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/fragment_obat.xml" value="0.22826086956521738" />
+        <entry key="..\:/UGD_PBP/app/src/main/res/layout/fragment_tambah_obat.xml" value="0.2" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/rv_item_obat.xml" value="0.22826086956521738" />
+        <entry key="..\:/UGD_PBP/app/src/main/res/menu/menu.xml" value="0.25" />
       </map>
     </option>
   </component>
