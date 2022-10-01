@@ -1,12 +1,20 @@
 package com.example.ugd3_pbp
 
 import android.content.Intent
+import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
+import com.example.ugd3_pbp.room.userDB
+import com.example.ugd3_pbp.room.userData
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var lUsername: String
     lateinit var lPassword: String
+
+    val db by lazy { userDB(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,25 +72,21 @@ class MainActivity : AppCompatActivity() {
                 checkLogin = false
             }
 
-            if (username == lUsername && password == lPassword) {
-                checkLogin = true
-            }else if (username != lUsername && password != lPassword){
-                usernameLogin2.setError("Username Wrong")
-                passwordLogin2.setError("Password Wrong")
-                checkLogin = false
-            }else if (username != lUsername){
-                usernameLogin2.setError("Username Wrong")
-                checkLogin = false
-            }else{
-                passwordLogin2.setError("Password Wrong")
-                checkLogin = false
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val user = db.userDao().getUser()
+                var i = 1
+                while (i < user.size) {
+                    if (user[i].username.equals(username)) {
+                        val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
+                        startActivity(moveHome)
+                        finish()
+                    }
+                    i++
+                }
+                Snackbar.make(btnLogin, "Failed to log in , please try again", Snackbar.LENGTH_LONG).show()
+
             }
-
-            if(!checkLogin)return@OnClickListener
-
-
-            val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
-            startActivity(moveHome)
 
         })
     }

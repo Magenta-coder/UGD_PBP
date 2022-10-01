@@ -26,7 +26,6 @@ class Register : AppCompatActivity() {
     private lateinit var btnRegis: Button
 
     val db by lazy { userDB(this) }
-    private var obatId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
