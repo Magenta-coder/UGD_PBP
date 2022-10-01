@@ -20,6 +20,6 @@ interface userDAO {
         suspend fun getUser() : List<userData>
 
         @Query("SELECT * FROM userData WHERE id =:user_id")
-        suspend fun getObat(user_id: Int) : List<userData>
+        suspend fun getUser(user_id: Int) : List<userData>
 
 }

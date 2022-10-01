@@ -6,7 +6,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import com.example.ugd3_pbp.databinding.ActivityRegisterBinding
+import com.example.ugd3_pbp.room.Obat
+import com.example.ugd3_pbp.room.ObatDB
+import com.example.ugd3_pbp.room.userDB
+import com.example.ugd3_pbp.room.userData
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.android.synthetic.main.activity_edit.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class Register : AppCompatActivity() {
 
@@ -16,6 +24,9 @@ class Register : AppCompatActivity() {
     private lateinit var date: TextInputEditText
     private lateinit var phoneNumber: TextInputEditText
     private lateinit var btnRegis: Button
+
+    val db by lazy { userDB(this) }
+    private var obatId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,8 +79,18 @@ class Register : AppCompatActivity() {
 
             if(!checkLogin)return@OnClickListener
 
+
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtras(mBundle)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    db.userDao().addUser(
+                        userData(0,username.text.toString(),
+                            email.text.toString(),date.text.toString(),phoneNumber.text.toString(),password.text.toString())
+                    )
+                    finish()
+                }
+
 
             startActivity(intent)
         })

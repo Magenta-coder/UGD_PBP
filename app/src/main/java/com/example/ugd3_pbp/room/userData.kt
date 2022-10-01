@@ -11,7 +11,7 @@ data class userData (
     val username: String,
     val email: String,
     val date: String,
-    val phonenum: Int,
+    val phonenum: String,
     val password: String
 
 )
