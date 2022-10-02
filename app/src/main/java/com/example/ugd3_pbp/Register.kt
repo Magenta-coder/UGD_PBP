@@ -5,6 +5,8 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -144,6 +146,8 @@ class Register : AppCompatActivity() {
 
         val actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
+        val picture = BitmapFactory.decodeResource(resources, R.drawable.heart)
+
         val builder = NotificationCompat.Builder(this, CHANNEL_ID_1)
             .setSmallIcon(R.drawable.ic_email_24)
             .setContentTitle("Berhasil Registrasi")
@@ -153,8 +157,11 @@ class Register : AppCompatActivity() {
             .setAutoCancel(true)
             .setOnlyAlertOnce(true)
             .setContentIntent(pendingIntent)
-            .addAction(R.mipmap.ic_launcher, "Toast", actionIntent)
+            .addAction(R.mipmap.ic_launcher, "Action", actionIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setStyle(NotificationCompat.BigPictureStyle()
+                .bigLargeIcon(null)
+                .bigPicture(picture))
 
         with(NotificationManagerCompat.from(this)) {
             notify(notificationId1, builder.build())
