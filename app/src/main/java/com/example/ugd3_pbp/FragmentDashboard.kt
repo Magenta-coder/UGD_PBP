@@ -29,6 +29,11 @@ class FragmentHome : Fragment() {
             startActivity(intent)
         }
 
+        bind.floatingActionButton.setOnClickListener {
+            val intent = Intent(this.requireContext(), PesanActivity::class.java)
+            startActivity(intent)
+        }
+
         return bind.root
         }
 
