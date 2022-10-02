@@ -77,10 +77,9 @@ class MainActivity : AppCompatActivity() {
                 val user = db.userDao().getUser()
                 var i = 1
                 while (i < user.size) {
-                    if (user[i].username.equals(username)) {
+                    if (user[i].username.equals(username) && user[i].password.equals(password)) {
                         val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
                         startActivity(moveHome)
-                        finish()
                     }
                     i++
                 }
