@@ -1,15 +1,32 @@
 package com.example.ugd3_pbp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.ugd3_pbp.databinding.ActivityProfileBinding
+import com.example.ugd3_pbp.databinding.FragmentDashboardBinding
 import com.example.ugd3_pbp.room.userDB
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : Fragment() {
 
-    val db by lazy{userDB(this)}
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        val bind = ActivityProfileBinding.inflate(layoutInflater)
+
+        bind.btnEdit.setOnClickListener {
+            val intent = Intent(this.requireContext(), EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        return bind.root
     }
+
+
 }
