@@ -59,7 +59,7 @@
             />
 
         <TextView
-            android:id="@+id/username2"
+            android:id="@+id/username23"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
@@ -99,8 +99,8 @@
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="0dp"
             android:textSize="21dp"
-            android:text=" Email:"
-            android:drawableStart="@drawable/ic_email_24"
+            android:text=" Tanggal:"
+            android:drawableStart="@drawable/ic_calendar"
             />
         <TextView
             android:id="@+id/tanggal2"

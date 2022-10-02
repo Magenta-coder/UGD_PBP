@@ -1,14 +1,13 @@
 package com.example.ugd3_pbp
 
 import android.content.Intent
-import android.database.Cursor
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.ugd3_pbp.databinding.ActivityProfileBinding
+import com.example.ugd3_pbp.databinding.ActivityRegisterBinding
 import com.example.ugd3_pbp.room.userDB
-import com.example.ugd3_pbp.room.userData
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -78,6 +77,17 @@ class MainActivity : AppCompatActivity() {
                 var i = 1
                 while (i < user.size) {
                     if (user[i].username.equals(username) && user[i].password.equals(password)) {
+//                        val mFragmentManager = supportFragmentManager
+//                        val mFragmentTransaction = mFragmentManager.beginTransaction()
+//                        val binding2 = ActivityProfileBinding.inflate(layoutInflater)
+//                        val mBundle = Bundle()
+//                        mBundle.putString("mText",username)
+//                        val mFragment = ProfileActivity()
+//                        mFragment.arguments = mBundle
+//                        supportFragmentManager.beginTransaction().apply {
+//                            replace(R.id.username23, mFragment)
+//                            commit()}
+
                         val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
                         startActivity(moveHome)
                     }
