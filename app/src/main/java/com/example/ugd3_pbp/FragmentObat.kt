@@ -1,5 +1,6 @@
 package com.example.ugd3_pbp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ugd3_pbp.databinding.FragmentDashboardBinding
+import com.example.ugd3_pbp.databinding.FragmentObatBinding
 import com.example.ugd3_pbp.entity.obat
 
 
@@ -16,8 +19,13 @@ class FragmentSearch : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_obat, container, false)
+        val bind = FragmentObatBinding.inflate(layoutInflater)
+
+        bind.floatingActionButton2.setOnClickListener {
+            val intent = Intent(this.requireContext(), TambahObat::class.java)
+            startActivity(intent)
+        }
+        return bind.root
     }
 
     override fun onViewCreated(view : View, savedInstanceState: Bundle?) {

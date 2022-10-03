@@ -24,10 +24,6 @@ class FragmentHome : Fragment() {
 
         val bind = FragmentDashboardBinding.inflate(layoutInflater)
 
-        bind.buttonObat.setOnClickListener {
-            val intent = Intent(this.requireContext(), TambahObat::class.java)
-            startActivity(intent)
-        }
 
         bind.floatingActionButton.setOnClickListener {
             val intent = Intent(this.requireContext(), PesanActivity::class.java)
