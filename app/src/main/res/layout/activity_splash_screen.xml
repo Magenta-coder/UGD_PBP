@@ -8,11 +8,11 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="118dp"
-        android:layout_height="135dp"
+        android:layout_width="352dp"
+        android:layout_height="412dp"
+        android:src="@mipmap/ic_launcher_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_medical_services_24" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
