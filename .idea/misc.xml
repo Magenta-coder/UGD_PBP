@@ -20,8 +20,9 @@
         <entry key="..\:/UGD_PBP/app/src/main/res/drawable/ic_delete.xml" value="0.1835" />
         <entry key="..\:/UGD_PBP/app/src/main/res/drawable/ic_edit.xml" value="0.1835" />
         <entry key="..\:/UGD_PBP/app/src/main/res/drawable/ic_launcher_background.xml" value="0.172" />
-        <entry key="..\:/UGD_PBP/app/src/main/res/layout/activity_edit.xml" value="0.1" />
+        <entry key="..\:/UGD_PBP/app/src/main/res/layout/activity_edit.xml" value="0.2" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/activity_edit_profile.xml" value="0.23731884057971014" />
+        <entry key="..\:/UGD_PBP/app/src/main/res/layout/activity_home.xml" value="0.6" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/activity_obat_adapter.xml" value="0.264" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/activity_pesan.xml" value="0.25" />
@@ -30,6 +31,7 @@
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/activity_splash_screen.xml" value="0.264" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/activity_tambah_obat.xml" value="0.18704710144927536" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/fragment_dashboard.xml" value="0.22826086956521738" />
+        <entry key="..\:/UGD_PBP/app/src/main/res/layout/fragment_edit_profile.xml" value="0.264" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/fragment_obat.xml" value="0.22826086956521738" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/fragment_tambah_obat.xml" value="0.2" />
         <entry key="..\:/UGD_PBP/app/src/main/res/layout/rv_item_obat.xml" value="0.22826086956521738" />
