@@ -22,4 +22,7 @@ interface userDAO {
         @Query("SELECT * FROM userData WHERE username =:user")
         suspend fun getUser(user: String) : List<userData>
 
+        @Query("SELECT * FROM userData WHERE id =:user")
+        fun getUser2(user: Int) : userData
+
 }

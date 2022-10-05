@@ -1,6 +1,7 @@
 package com.example.ugd3_pbp
 
 import android.content.DialogInterface
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -63,5 +64,10 @@ class HomeActivity : AppCompatActivity() {
                 .replace(R.id.layout_fragment, fragment)
                 .commit()
         }
+    }
+    var pref: SharedPreferences? = null
+
+    fun getSharedPreferences(): SharedPreferences? {
+        return pref
     }
 }

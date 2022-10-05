@@ -1,5 +1,6 @@
 package com.example.ugd3_pbp
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,10 @@ import androidx.fragment.app.Fragment
 import com.example.ugd3_pbp.databinding.ActivityProfileBinding
 import com.example.ugd3_pbp.databinding.FragmentDashboardBinding
 import com.example.ugd3_pbp.room.userDB
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ProfileActivity : Fragment() {
     private lateinit var tvUsername: TextView
@@ -25,13 +30,24 @@ class ProfileActivity : Fragment() {
 
         val bind = ActivityProfileBinding.inflate(layoutInflater)
 
-//        val inputData = arguments?.getString("mText")
-//        bind.username23.text = inputData.toString()
-//
-////        val bundle = this.arguments
-////        val message = bundle?.get("mText")
-////
-//        tvUsername.text = message.toString()
+
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val sharedPreferences = (activity as HomeActivity).getSharedPreferences("prefId",Context.MODE_PRIVATE)
+
+            val db by lazy { userDB(activity as HomeActivity) }
+            val userDa = db.userDao()
+            val user = userDa.getUser2(sharedPreferences!!.getInt("id",0))
+
+            if (user != null) {
+                bind.username23.setText(user.username)
+                bind.email2.setText(user.email)
+                bind.phone2.setText(user.phonenum)
+                bind.tanggal2.setText(user.date)
+            }
+
+        }
 
 
 
