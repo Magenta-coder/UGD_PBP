@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ugd3_pbp.databinding.ActivityEditProfileBinding
@@ -26,6 +27,7 @@ class EditProfileActivity : AppCompatActivity() {
     lateinit var etEmail: EditText
     lateinit var etContactNo: EditText
     lateinit var etDes: EditText
+    lateinit var img : ImageView
     val db by lazy { userDB(this) }
     private var bind: ActivityEditProfileBinding? = null
     private var userId: Int = 0
@@ -63,6 +65,12 @@ class EditProfileActivity : AppCompatActivity() {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
+
+        bind?.imageView4?.setOnClickListener {
+            val intent = Intent(this, CameraActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
 

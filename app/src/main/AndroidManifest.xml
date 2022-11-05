@@ -14,6 +14,9 @@
         android:theme="@style/Theme.UGD3_PBP"
         tools:targetApi="31">
         <activity
+            android:name=".CameraActivity"
+            android:exported="false" />
+        <activity
             android:name=".PesanActivity"
             android:exported="false" />
         <activity
@@ -47,6 +50,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">
@@ -54,7 +58,8 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <receiver android:name=".NotificationReceiver"/>
+
+        <receiver android:name=".NotificationReceiver" />
     </application>
 
 </manifest>
