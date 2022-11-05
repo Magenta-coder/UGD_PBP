@@ -25,6 +25,12 @@ class FragmentSearch : Fragment() {
             val intent = Intent(this.requireContext(), TambahObat::class.java)
             startActivity(intent)
         }
+
+        bind.FBMaps.setOnClickListener {
+            val intent2 = Intent(this.requireContext(), MapsActivity::class.java)
+            startActivity(intent2)
+        }
+
         return bind.root
     }
 

@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.767556409003435,
+          "lng": 110.41014723622925
+        }
+      },
+      "name": "Apotek K-24",
+      "vicinity": "Jl. Seturan Raya No.101A, Kledokan, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.768216,
+          "lng": 110.408285
+        }
+      },
+      "name": "Ambarukmo Apotik",
+      "vicinity": "Jl. Demangan Baru No.5, Kledokan, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.76950973931129,
+          "lng": 110.40974490491307
+        }
+      },
+      "name": "Apotek Kimia Farma Seturan",
+      "vicinity": "Jl. Seturan Raya No.Blok C, Kledokan, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281"
+    }
+  ],
+  "status": "OK"
+}
