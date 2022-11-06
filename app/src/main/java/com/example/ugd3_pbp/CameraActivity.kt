@@ -1,6 +1,7 @@
 package com.example.ugd3_pbp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.hardware.Camera
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -27,6 +28,9 @@ class CameraActivity : AppCompatActivity() {
         }
         @SuppressLint("MissingInflateId","LocalSuppress") val imageClose =
             findViewById<View>(R.id.imgClose) as ImageButton
-        imageClose.setOnClickListener { view: View? -> System.exit(0)}
+        imageClose.setOnClickListener {
+            val go = Intent(this, HomeActivity::class.java)
+            startActivity(go)
+        }
     }
 }

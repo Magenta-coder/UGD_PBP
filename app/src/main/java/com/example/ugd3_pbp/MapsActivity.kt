@@ -46,10 +46,8 @@ class MapsActivity : AppCompatActivity() {
         btn_kembali = findViewById<FloatingActionButton>(R.id.FAButtonBack)
         btn_kembali.setOnClickListener {
 
-            //berpindah activity Intent(activity-saat-ini, activity-tujuan)
             val go = Intent(this, HomeActivity::class.java)
 
-            //menjalankan intent
             startActivity(go)
         }
     }

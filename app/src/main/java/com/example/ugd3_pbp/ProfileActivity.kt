@@ -30,7 +30,10 @@ class ProfileActivity : Fragment() {
 
         val bind = ActivityProfileBinding.inflate(layoutInflater)
 
-
+        bind.profileIcon.setOnClickListener {
+            val intent = Intent(this.requireContext(), CameraActivity::class.java)
+            startActivity(intent)
+        }
 
 
         CoroutineScope(Dispatchers.IO).launch {
