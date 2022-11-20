@@ -13,29 +13,39 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.android.volley.AuthFailureError
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.example.ugd3_pbp.api.UserApi
 import com.example.ugd3_pbp.databinding.ActivityRegisterBinding
+import com.example.ugd3_pbp.entity.User
 import com.example.ugd3_pbp.room.Obat
 import com.example.ugd3_pbp.room.ObatDB
 import com.example.ugd3_pbp.room.userDB
 import com.example.ugd3_pbp.room.userData
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_edit.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
+import java.nio.charset.StandardCharsets
 
 class Register : AppCompatActivity() {
 
-    private lateinit var username: TextInputEditText
-    private lateinit var password: TextInputEditText
-    private lateinit var email: TextInputEditText
-    private lateinit var date: TextInputEditText
-    private lateinit var phoneNumber: TextInputEditText
-    private lateinit var btnRegis: Button
+    private var username: TextInputEditText? = null
+    private var password: TextInputEditText? = null
+    private var email: TextInputEditText? = null
+    private var date: TextInputEditText? = null
+    private var phoneNumber: TextInputEditText? = null
+    private var queue: RequestQueue? = null
 
-    val db by lazy { userDB(this) }
 
     private var bindings: ActivityRegisterBinding? = null
     private val CHANNEL_ID_1 = "channel_notification_01"
@@ -51,13 +61,14 @@ class Register : AppCompatActivity() {
 
         setTitle("User Register")
 
+
+        queue = Volley.newRequestQueue(this)
         username = binding.username2
         password= binding.password2
         email = binding.email2
         date = binding.date2
         phoneNumber = binding.phone2
-        btnRegis = binding.btnRegis
-
+        val btnRegis = binding.btnRegis
 
         val mBundle = Bundle()
 
@@ -65,49 +76,12 @@ class Register : AppCompatActivity() {
 
         btnRegis.setOnClickListener(View.OnClickListener{
 
-            mBundle.putString("username", username.text.toString())
-            mBundle.putString("password", password.text.toString())
-            mBundle.putString("email", email.text.toString())
-            mBundle.putString("date", date.text.toString())
-            mBundle.putString("phone", phoneNumber.text.toString())
-
-            var checkLogin = false
-            val checkUsername: String = username.text.toString()
-            val checkPassword: String = password.text.toString()
-            val checkPhoneNbr: String = phoneNumber.text.toString()
-            val checkDate: String = date.text.toString()
-
-
-            if (checkUsername.isEmpty()){
-                username.setError("Username must be filled with text")
-                checkLogin = false
-            }else if (checkPassword.isEmpty()) {
-                password.setError("Password must be filled with text")
-                checkLogin = false
-            }else if (checkPhoneNbr.isEmpty()) {
-                phoneNumber.setError("Phone Number are required")
-                checkLogin = false
-            }else if(checkDate.isEmpty()) {
-                date.setError("Date must be filled")
-                checkLogin = false
-            }else{
-                checkLogin = true
-            }
-
-            if(!checkLogin)return@OnClickListener
-
 
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtras(mBundle)
 
-            sendNotification1(username.text.toString())
-                CoroutineScope(Dispatchers.IO).launch {
-                    db.userDao().addUser(
-                        userData(0,username.text.toString(),
-                            email.text.toString(),date.text.toString(),phoneNumber.text.toString(),password.text.toString())
-                    )
-                    finish()
-                }
+            sendNotification1(username!!.text.toString())
+            createUser()
 
 
             startActivity(intent)
@@ -166,6 +140,67 @@ class Register : AppCompatActivity() {
         with(NotificationManagerCompat.from(this)) {
             notify(notificationId1, builder.build())
         }
+    }
+
+    private fun createUser() {
+
+        val user = User(
+            username!!.text.toString(),
+            password!!.text.toString(),
+            email!!.text.toString(),
+            date!!.text.toString(),
+            phoneNumber!!.text.toString(),
+        )
+
+        val stringRequest: StringRequest =
+            object : StringRequest(Method.POST, UserApi.ADD_URL, Response.Listener { response ->
+                val gson = Gson()
+                val user = gson.fromJson(response, User::class.java)
+
+                if (user != null)
+                    Toast.makeText(
+                        this@Register,
+                        "Data berhasil ditambahkan",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                val returnIntent = Intent()
+                setResult(RESULT_OK, returnIntent)
+                finish()
+
+            }, Response.ErrorListener { error ->
+
+                try {
+                    val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                    val errors = JSONObject(responseBody)
+                    Toast.makeText(
+                        this@Register,
+                        errors.getString("message"),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } catch (e: Exception) {
+                    Toast.makeText(this@Register, e.message, Toast.LENGTH_SHORT).show()
+                }
+            }) {
+                @Throws(AuthFailureError::class)
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Accept"] = "application/json"
+                    return headers
+                }
+
+                @Throws(AuthFailureError::class)
+                override fun getBody(): ByteArray {
+                    val gson = Gson()
+                    val requestBody = gson.toJson(user)
+                    return requestBody.toByteArray(StandardCharsets.UTF_8)
+                }
+
+                override fun getBodyContentType(): String {
+                    return "application/json"
+                }
+            }
+        queue!!.add(stringRequest)
     }
 
 }
