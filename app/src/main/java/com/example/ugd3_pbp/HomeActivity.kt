@@ -15,12 +15,12 @@ class HomeActivity : AppCompatActivity() {
 
     private val selected = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.home -> {
-                changeFragment(FragmentHome())
-                true
-            }
             R.id.obat -> {
                 changeFragment(FragmentSearch())
+                true
+            }
+            R.id.home -> {
+                changeFragment(FragmentHome())
                 true
             }
             R.id.profile -> {
