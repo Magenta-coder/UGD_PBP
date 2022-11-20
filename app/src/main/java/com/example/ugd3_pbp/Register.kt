@@ -5,15 +5,13 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.android.volley.AuthFailureError
@@ -24,16 +22,10 @@ import com.android.volley.toolbox.Volley
 import com.example.ugd3_pbp.api.UserApi
 import com.example.ugd3_pbp.databinding.ActivityRegisterBinding
 import com.example.ugd3_pbp.entity.User
-import com.example.ugd3_pbp.room.Obat
-import com.example.ugd3_pbp.room.ObatDB
-import com.example.ugd3_pbp.room.userDB
-import com.example.ugd3_pbp.room.userData
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_edit.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import org.json.JSONException
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
@@ -76,13 +68,17 @@ class Register : AppCompatActivity() {
 
         btnRegis.setOnClickListener(View.OnClickListener{
 
+            val sUsername = username!!.text.toString()
+            val sEmail = email!!.text.toString()
+            val sDate = date!!.text.toString()
+            val sPhonenum = phoneNumber!!.text.toString()
+            val sPassword: String = password!!.text.toString()
 
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtras(mBundle)
 
-            sendNotification1(username!!.text.toString())
-            createUser()
-
+            sendNotification1(sUsername)
+            CreateDataToServer(sUsername,sEmail,sDate,sPhonenum,sPassword)
 
             startActivity(intent)
         })
@@ -142,65 +138,43 @@ class Register : AppCompatActivity() {
         }
     }
 
-    private fun createUser() {
 
-        val user = User(
-            username!!.text.toString(),
-            password!!.text.toString(),
-            email!!.text.toString(),
-            date!!.text.toString(),
-            phoneNumber!!.text.toString(),
-        )
-
-        val stringRequest: StringRequest =
-            object : StringRequest(Method.POST, UserApi.ADD_URL, Response.Listener { response ->
-                val gson = Gson()
-                val user = gson.fromJson(response, User::class.java)
-
-                if (user != null)
-                    Toast.makeText(
-                        this@Register,
-                        "Data berhasil ditambahkan",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                val returnIntent = Intent()
-                setResult(RESULT_OK, returnIntent)
-                finish()
-
-            }, Response.ErrorListener { error ->
-
-                try {
-                    val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
-                    val errors = JSONObject(responseBody)
-                    Toast.makeText(
-                        this@Register,
-                        errors.getString("message"),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } catch (e: Exception) {
-                    Toast.makeText(this@Register, e.message, Toast.LENGTH_SHORT).show()
-                }
-            }) {
+    fun CreateDataToServer(username: String, email: String, date: String, phonenum: String, password: String) {
+            val stringRequest: StringRequest = object : StringRequest(
+                Method.POST, UserApi.ADD_URL,
+                Response.Listener { response ->
+                    try {
+                        val jsonObject = JSONObject(response)
+                        val resp = jsonObject.getString("server_response")
+                        if (resp == "[{\"status\":\"OK\"}]") {
+                            Toast.makeText(
+                                applicationContext,
+                                "Registrasi Berhasil",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(applicationContext, resp, Toast.LENGTH_SHORT).show()
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                },
+                Response.ErrorListener { }) {
                 @Throws(AuthFailureError::class)
-                override fun getHeaders(): Map<String, String> {
-                    val headers = HashMap<String, String>()
-                    headers["Accept"] = "application/json"
-                    return headers
-                }
-
-                @Throws(AuthFailureError::class)
-                override fun getBody(): ByteArray {
-                    val gson = Gson()
-                    val requestBody = gson.toJson(user)
-                    return requestBody.toByteArray(StandardCharsets.UTF_8)
-                }
-
-                override fun getBodyContentType(): String {
-                    return "application/json"
+                override fun getParams(): Map<String, String>? {
+                    val params: MutableMap<String, String> = java.util.HashMap()
+                    params["username"] = username
+                    params["email"] = email
+                    params["date"] = date
+                    params["phonenum"] = phonenum
+                    params["password"] = password
+                    return params
                 }
             }
         queue!!.add(stringRequest)
+
     }
 
 }
+
+
