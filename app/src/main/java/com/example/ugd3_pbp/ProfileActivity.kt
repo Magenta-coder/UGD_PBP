@@ -2,6 +2,7 @@ package com.example.ugd3_pbp
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,6 +24,8 @@ class ProfileActivity : Fragment() {
     private lateinit var tvPhone: TextView
     private lateinit var tvTanggal: TextView
 
+    lateinit var preferences: SharedPreferences
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,21 +39,23 @@ class ProfileActivity : Fragment() {
         }
 
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val sharedPreferences = (activity as HomeActivity).getSharedPreferences("prefId",Context.MODE_PRIVATE)
+//            preferences  = (activity as HomeActivity).getSharedPreferences()
+//                (activity as HomeActivity).getSharedPreferences("prefId",Context.MODE_PRIVATE)
 
-            val db by lazy { userDB(activity as HomeActivity) }
-            val userDa = db.userDao()
-            val user = userDa.getUser2(sharedPreferences!!.getInt("id",0))
+//            val username = preferences!!.getString("username","Coba")
+//            val password = preferences!!.getString("password",null)
 
-            if (user != null) {
-                bind.username23.setText(user.username)
-                bind.email2.setText(user.email)
-                bind.phone2.setText(user.phonenum)
-                bind.tanggal2.setText(user.date)
-            }
+            val username = (activity as HomeActivity).getSharedPreferences()
 
-        }
+
+
+                bind.username23.setText(username)
+                bind.email2.setText(username)
+                bind.phone2.setText(username)
+                bind.tanggal2.setText(username)
+
+
+
 
 
 

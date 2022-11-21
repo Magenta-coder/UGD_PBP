@@ -7,5 +7,6 @@ class UserApi {
         val ADD_URL = BASE_URL + "createData.php"
         val UPDATE_URL = BASE_URL + "user/"
         val LOGIN_URL = BASE_URL + "checkLogin.php"
+        val CHECK_LOGIN_URL = BASE_URL + "checkUser.php"
     }
 }

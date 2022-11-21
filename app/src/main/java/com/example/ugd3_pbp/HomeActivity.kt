@@ -67,7 +67,8 @@ class HomeActivity : AppCompatActivity() {
     }
     var pref: SharedPreferences? = null
 
-    fun getSharedPreferences(): SharedPreferences? {
-        return pref
+    fun getSharedPreferences(): String? {
+        val username = getSharedPreferences("prefId", MODE_PRIVATE)
+        return username.getString("username","Coba")
     }
 }

@@ -88,7 +88,15 @@ class MainActivity : AppCompatActivity() {
 //                checkLogin = false
 //            }
 
+
+            val editor= pref?.edit()
+
+            editor?.putString("username",username)
+            editor?.putString("password",password)
+            editor?.apply()
+
             CheckLogin(username,password)
+
 
 
         })
@@ -96,15 +104,18 @@ class MainActivity : AppCompatActivity() {
 
     fun CheckLogin(username: String, password: String) {
             val stringRequest: StringRequest = object : StringRequest(
-                Method.POST, UserApi.LOGIN_URL,
+                Method.POST, UserApi.CHECK_LOGIN_URL,
                 Response.Listener { response ->
                     try {
                         val jsonObject = JSONObject(response)
                         val resp = jsonObject.getString("server_response")
-                        if (resp == "[{\"status\":\"OK\"}]") {
+                        if (resp != "[{\"status\":\"FAILED\"}]") {
+
                             Toast.makeText(applicationContext, "Login Berhasil", Toast.LENGTH_SHORT)
                                 .show()
+
                             val dashboardIntent = Intent(this@MainActivity, HomeActivity::class.java)
+                            dashboardIntent.putExtra("usernameLogin",username);
                             startActivity(dashboardIntent)
                         } else {
                             Toast.makeText(applicationContext, "Login Gagal, Coba Lagi", Toast.LENGTH_SHORT).show()
