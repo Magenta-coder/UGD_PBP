@@ -29,16 +29,17 @@ class EditProfileActivity : AppCompatActivity() {
     lateinit var etDes: EditText
     lateinit var img : ImageView
     val db by lazy { userDB(this) }
-    private var bind: ActivityEditProfileBinding? = null
-    private var userId: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
+        val bind = ActivityEditProfileBinding.inflate(layoutInflater)
+
 
         bind?.btnUpdateProfile?.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
+            val dashboardIntent = Intent(this@EditProfileActivity, HomeActivity::class.java)
+            startActivity(dashboardIntent)
         }
 
         bind?.imageView4?.setOnClickListener {
