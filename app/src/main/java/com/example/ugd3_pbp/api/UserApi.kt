@@ -5,7 +5,9 @@ class UserApi {
         val BASE_URL = "http://192.168.43.54/tubes_pbp/"
 
         val ADD_URL = BASE_URL + "createData.php"
-        val UPDATE_URL = BASE_URL + "user/"
+        val UPDATE_URL = BASE_URL + "user"
         val LOGIN_URL = BASE_URL + "checkLogin.php"
+        val CHECK_LOGIN_URL = BASE_URL + "checkUser.php"
+        val TAMPIL_PROFILE_URL = BASE_URL + "tampilUser.php?id="
     }
 }

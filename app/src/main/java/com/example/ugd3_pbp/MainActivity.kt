@@ -15,10 +15,12 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.ugd3_pbp.api.UserApi
+import com.example.ugd3_pbp.entity.User
 import com.example.ugd3_pbp.room.userDB
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -91,20 +93,33 @@ class MainActivity : AppCompatActivity() {
             CheckLogin(username,password)
 
 
+
         })
     }
 
     fun CheckLogin(username: String, password: String) {
             val stringRequest: StringRequest = object : StringRequest(
-                Method.POST, UserApi.LOGIN_URL,
+                Method.POST, UserApi.CHECK_LOGIN_URL,
                 Response.Listener { response ->
                     try {
                         val jsonObject = JSONObject(response)
                         val resp = jsonObject.getString("server_response")
-                        if (resp == "[{\"status\":\"OK\"}]") {
+                        val resp2 = jsonObject.getJSONArray("server_response")
+                        if (resp != "[{\"status\":\"FAILED\"}]") {
+
+                            val jsn = resp2.getJSONObject(0)
+                            val editor= pref?.edit()
+                            val id = jsn.getInt("id")
+
+                            editor?.putString("username",username)
+                            editor?.putInt("id",id)
+                            editor?.apply()
+
                             Toast.makeText(applicationContext, "Login Berhasil", Toast.LENGTH_SHORT)
                                 .show()
+
                             val dashboardIntent = Intent(this@MainActivity, HomeActivity::class.java)
+                            dashboardIntent.putExtra("usernameLogin",username);
                             startActivity(dashboardIntent)
                         } else {
                             Toast.makeText(applicationContext, "Login Gagal, Coba Lagi", Toast.LENGTH_SHORT).show()
