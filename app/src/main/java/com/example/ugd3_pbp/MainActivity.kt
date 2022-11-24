@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -115,14 +116,16 @@ class MainActivity : AppCompatActivity() {
                             editor?.putInt("id",id)
                             editor?.apply()
 
-                            Toast.makeText(applicationContext, "Login Berhasil", Toast.LENGTH_SHORT)
-                                .show()
+//                            Toast.makeText(applicationContext, "Login Berhasil", Toast.LENGTH_SHORT)
+//                                .show()
+                            StyleableToast.makeText(applicationContext, "Login Berhasil", Toast.LENGTH_SHORT, R.style.mytoast2).show()
 
                             val dashboardIntent = Intent(this@MainActivity, HomeActivity::class.java)
                             dashboardIntent.putExtra("usernameLogin",username);
                             startActivity(dashboardIntent)
                         } else {
-                            Toast.makeText(applicationContext, "Login Gagal, Coba Lagi", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(applicationContext, "Login Gagal, Coba Lagi", Toast.LENGTH_SHORT).show()
+                            StyleableToast.makeText(applicationContext, "Login Gagal, Coba Lagi", Toast.LENGTH_SHORT, R.style.mytoast).show()
                         }
                     } catch (e: JSONException) {
                         e.printStackTrace()
