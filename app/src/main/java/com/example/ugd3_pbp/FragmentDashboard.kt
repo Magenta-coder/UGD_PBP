@@ -7,16 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import com.example.ugd3_pbp.databinding.FragmentDashboardBinding
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.*
 
 
 class FragmentHome : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-
+    private lateinit var imageView: ImageView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,7 +22,12 @@ class FragmentHome : Fragment() {
 
         val bind = FragmentDashboardBinding.inflate(layoutInflater)
 
+        imageView = bind.imageViewDashboard
 
+        Picasso.get().load("https://cdn.linkumkm.id/library/2/8/7/5/5/28755_840x576.jpg")
+            .placeholder(R.drawable.load_page)
+            .error(R.mipmap.ic_dashboard_image)
+            .into(imageView)
 
         bind.floatingActionButton.setOnClickListener {
             val intent = Intent(this.requireContext(), PesanActivity::class.java)
