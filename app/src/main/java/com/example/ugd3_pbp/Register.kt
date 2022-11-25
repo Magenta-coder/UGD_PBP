@@ -24,6 +24,7 @@ import com.example.ugd3_pbp.databinding.ActivityRegisterBinding
 import com.example.ugd3_pbp.entity.User
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.android.synthetic.main.activity_edit.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -147,13 +148,15 @@ class Register : AppCompatActivity() {
                         val jsonObject = JSONObject(response)
                         val resp = jsonObject.getString("server_response")
                         if (resp == "[{\"status\":\"OK\"}]") {
-                            Toast.makeText(
-                                applicationContext,
-                                "Registrasi Berhasil",
-                                Toast.LENGTH_SHORT
-                            ).show()
+//                            Toast.makeText(
+//                                applicationContext,
+//                                "Registrasi Berhasil",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+                            StyleableToast.makeText(applicationContext, "Registrasi Berhasil", Toast.LENGTH_SHORT, R.style.mytoast2).show()
                         } else {
-                            Toast.makeText(applicationContext, resp, Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(applicationContext, resp, Toast.LENGTH_SHORT).show()
+                            StyleableToast.makeText(applicationContext, "Registrasi Gagal, Coba Lagi", Toast.LENGTH_SHORT, R.style.mytoast).show()
                         }
                     } catch (e: JSONException) {
                         e.printStackTrace()

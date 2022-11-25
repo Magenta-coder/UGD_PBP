@@ -15,6 +15,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
+        multiDexEnabled = true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -70,4 +71,8 @@ dependencies {
 
     //Custom Toast
     implementation 'io.github.muddz:styleabletoast:2.4.0'
+
+    //Custom Button
+    implementation 'com.github.fornewid:neumorphism:0.3.2'
+    implementation("androidx.multidex:multidex:2.0.1")
 }
