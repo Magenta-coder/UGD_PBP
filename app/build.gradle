@@ -78,4 +78,17 @@ dependencies {
 
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //implementasi PDF Library IText
+    implementation 'com.itextpdf:itext7-core:7.1.13'
+
+    //implementasi qr Code Scanner
+    implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
+
+    //implementasi qr Code generate
+    implementation 'com.github.kenglxn.qrgen:android:2.6.0'
+    implementation 'com.google.mlkit:barcode-scanning:17.0.2'
+
+    //implementasi PDF Liblary OpenPDF
+    implementation 'com.github.librepdf:openpdf:1.3.29'
 }

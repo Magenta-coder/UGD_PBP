@@ -34,6 +34,11 @@ class FragmentHome : Fragment() {
             startActivity(intent)
         }
 
+        bind.floatingActionButton3.setOnClickListener {
+            val intent = Intent(this.requireContext(), PdfOrQRActivity::class.java)
+            startActivity(intent)
+        }
+
         return bind.root
         }
 
