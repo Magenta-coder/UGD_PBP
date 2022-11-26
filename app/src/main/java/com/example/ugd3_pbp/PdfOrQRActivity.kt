@@ -29,5 +29,15 @@ class PdfOrQRActivity : AppCompatActivity() {
             startActivity(dashboardIntent)
         }
 
+        binding.toPdfButton.setOnClickListener {
+            val pdfIntent = Intent(this@PdfOrQRActivity, PDFActivity::class.java)
+            startActivity(pdfIntent)
+        }
+
+        binding.toQRButton.setOnClickListener {
+            val qrIntent = Intent(this@PdfOrQRActivity, QRActivity::class.java)
+            startActivity(qrIntent)
+        }
+
     }
 }
