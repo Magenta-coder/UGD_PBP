@@ -9,14 +9,24 @@ import android.os.Bundle
 import android.os.Environment
 import android.view.View
 import android.widget.Toast
+import com.itextpdf.io.image.ImageDataFactory
 import androidx.annotation.RequiresApi
 import com.example.ugd3_pbp.databinding.ActivityPdfactivityBinding
-import com.itextpdf.text.Document
-import com.itextpdf.text.Image
-import com.itextpdf.text.Paragraph
-import com.itextpdf.text.pdf.BarcodeQRCode
-import com.itextpdf.text.pdf.PdfDocument
-import com.itextpdf.text.pdf.PdfWriter
+import com.itextpdf.barcodes.BarcodeQRCode
+import com.itextpdf.kernel.colors.ColorConstants
+
+
+import com.itextpdf.kernel.geom.PageSize
+import com.itextpdf.kernel.pdf.PdfWriter
+import com.itextpdf.kernel.pdf.PdfDocument
+import com.itextpdf.layout.Document
+import com.itextpdf.layout.element.Cell
+import com.itextpdf.layout.element.Image
+import com.itextpdf.layout.element.Paragraph
+import com.itextpdf.layout.element.Table
+import com.itextpdf.layout.property.HorizontalAlignment
+import com.itextpdf.layout.property.TextAlignment
+import com.jakewharton.threetenabp.AndroidThreeTen
 
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -24,6 +34,7 @@ import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 
@@ -35,6 +46,8 @@ class PDFActivity : AppCompatActivity() {
         binding =  ActivityPdfactivityBinding.inflate(layoutInflater)
         val view: View = binding!!.root
         setContentView(view)
+        //initialises ThreeTen
+        AndroidThreeTen.init(this)
 
 
         binding!!.buttonSave.setOnClickListener {
@@ -83,9 +96,9 @@ class PDFActivity : AppCompatActivity() {
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
         val bitmapdata = stream.toByteArray()
-        val imageData = ImageDataFactor.create(bitmapdata)
+        val imageData = ImageDataFactory.create(bitmapdata)
         val image = Image(imageData)
-        val namapengguna = Paragraph("Identitas Pengguna").alignment
+        val namapengguna = Paragraph("Identitas Pengguna").setBold().setFontSize(24f)
         val group = Paragraph (
             """
                 Berikut adalah
@@ -109,10 +122,10 @@ class PDFActivity : AppCompatActivity() {
 
         val dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         table.addCell(Cell().add(Paragraph("Tanggal Buat PDF")))
-        table.addCell(Cell().add(Paragraph(LocalDate.now().format(dateTimeFormatter))))
+        table.addCell(Cell().add(Paragraph(LocalDate.now(ZoneId.of("Asia/Jakarta")).format(dateTimeFormatter))))
         val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss a")
         table.addCell(Cell().add(Paragraph("Pukul Pembuatan ")))
-        table.addCell(Cell().add(Paragraph(LocalTime.now().format(timeFormatter))))
+        table.addCell(Cell().add(Paragraph(LocalTime.now(ZoneId.of("Asia/Jakarta")).format(timeFormatter))))
 
         val barcodeQRCode = BarcodeQRCode("""
             $nama
