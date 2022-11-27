@@ -81,7 +81,8 @@ dependencies {
 
 
     //implementasi PDF Library IText
-    implementation 'com.itextpdf:itext7-core:7.1.13'
+//    implementation 'com.itextpdf:itext7-core:7.1.13'
+    implementation 'com.itextpdf:itextg:5.5.10'
 
     //implementasi qr Code Scanner
     implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
