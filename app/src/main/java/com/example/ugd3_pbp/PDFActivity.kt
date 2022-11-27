@@ -133,6 +133,6 @@ class PDFActivity : AppCompatActivity() {
 //        document.add(qrCodeImage)
 //        document.close()
 //        Toast.makeText(applicationContext, "PDF Created", Toast.LENGTH_SHORT).show()
-    }
+//    }
 
 }
