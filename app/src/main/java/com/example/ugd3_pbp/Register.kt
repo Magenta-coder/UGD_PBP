@@ -81,7 +81,7 @@ class Register : AppCompatActivity() {
             sendNotification1(sUsername)
             CreateDataToServer(sUsername,sEmail,sDate,sPhonenum,sPassword)
 
-            startActivity(intent)
+//            startActivity(intent)
         })
     }
 
