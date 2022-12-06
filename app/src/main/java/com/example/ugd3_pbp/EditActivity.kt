@@ -3,9 +3,11 @@ package com.example.ugd3_pbp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.example.ugd3_pbp.room.Constant
 import com.example.ugd3_pbp.room.Obat
 import com.example.ugd3_pbp.room.ObatDB
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.android.synthetic.main.activity_edit.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,13 +45,26 @@ class EditActivity : AppCompatActivity() {
 
     private fun setupListener() {
         button_save.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                db.obatDao().addObat(
-                    Obat(0,edit_title.text.toString(),
-                        edit_deskripsi.text.toString())
-                )
-                finish()
+            if (edit_title.text.toString().isEmpty()){
+                StyleableToast.makeText(applicationContext, "Tambah Obat Gagal, Title tidak boleh kosong", Toast.LENGTH_LONG, R.style.mytoast).show()
+            }else if (edit_deskripsi.text.toString().isEmpty()){
+                StyleableToast.makeText(applicationContext, "Tambah Obat Gagal, Deskripsi tidak boleh kosong", Toast.LENGTH_LONG, R.style.mytoast).show()
             }
+            else if (edit_deskripsi.text.toString().length < 20){
+                StyleableToast.makeText(applicationContext, "Tambah Obat Gagal, Deskripsi terlalu pendek", Toast.LENGTH_LONG, R.style.mytoast).show()
+            }
+            else {
+                CoroutineScope(Dispatchers.IO).launch {
+                    db.obatDao().addObat(
+                        Obat(
+                            0, edit_title.text.toString(),
+                            edit_deskripsi.text.toString()
+                        )
+                    )
+                    finish()
+                }
+            }
+
         }
         button_update.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {

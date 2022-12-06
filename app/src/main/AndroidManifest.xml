@@ -70,14 +70,14 @@
             android:exported="false" />
         <activity
             android:name=".TambahObat"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ObatAdapter"
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
             android:name=".EditActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SplashScreen"
             android:exported="true">
