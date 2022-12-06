@@ -77,10 +77,25 @@ class Register : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtras(mBundle)
+            if (sUsername.isEmpty()){
+                StyleableToast.makeText(applicationContext, "Registrasi Gagal, Coba Lagi username", Toast.LENGTH_SHORT, R.style.mytoast).show()
+            }else if (sPassword.isEmpty()){
+                StyleableToast.makeText(applicationContext, "Registrasi Gagal, Coba Lagi Password", Toast.LENGTH_SHORT, R.style.mytoast).show()
+            }
+            else if (sEmail.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(sEmail).matches()){
+                StyleableToast.makeText(applicationContext, "Registrasi Gagal, Coba Lagi Email", Toast.LENGTH_SHORT, R.style.mytoast).show()
+            }
+            else if (sDate.isEmpty()){
+                StyleableToast.makeText(applicationContext, "Registrasi Gagal, Coba Lagi Date", Toast.LENGTH_SHORT, R.style.mytoast).show()
+            }
+            else if (sPhonenum.isEmpty() || sPhonenum.length < 10){
+                StyleableToast.makeText(applicationContext, "Registrasi Gagal, Coba Lagi Phone Number", Toast.LENGTH_SHORT, R.style.mytoast).show()
+            }
 
-            sendNotification1(sUsername)
-            CreateDataToServer(sUsername,sEmail,sDate,sPhonenum,sPassword)
-
+            else{
+                sendNotification1(sUsername)
+                CreateDataToServer(sUsername,sEmail,sDate,sPhonenum,sPassword)
+            }
 //            startActivity(intent)
         })
     }
@@ -153,10 +168,12 @@ class Register : AppCompatActivity() {
 //                                "Registrasi Berhasil",
 //                                Toast.LENGTH_SHORT
 //                            ).show()
+                            val dashboardIntent = Intent(this@Register, MainActivity::class.java)
                             StyleableToast.makeText(applicationContext, "Registrasi Berhasil", Toast.LENGTH_SHORT, R.style.mytoast2).show()
+                            startActivity(dashboardIntent)
                         } else {
-//                            Toast.makeText(applicationContext, resp, Toast.LENGTH_SHORT).show()
-                            StyleableToast.makeText(applicationContext, "Registrasi Gagal, Coba Lagi", Toast.LENGTH_SHORT, R.style.mytoast).show()
+                            Toast.makeText(applicationContext, resp, Toast.LENGTH_SHORT).show()
+//                            StyleableToast.makeText(applicationContext, "Registrasi Gagal, Coba Lagi", Toast.LENGTH_SHORT, R.style.mytoast).show()
                         }
                     } catch (e: JSONException) {
                         e.printStackTrace()

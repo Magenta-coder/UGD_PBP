@@ -49,7 +49,7 @@ class AdapterObat (private var obatList: List<obat>, context: Context):
         val obat = filteredObatList[position]
         holder.tvNama.text = obat.nama
         holder.tvKode.text= obat.kode
-        holder.tvJenis.text=obat.kode
+        holder.tvJenis.text=obat.jenis
         holder.tvTipe.text=obat.tipe
 
         holder.btnDelete.setOnClickListener{

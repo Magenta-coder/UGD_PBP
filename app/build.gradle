@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
+    id 'com.google.gms.google-services'
 }
 apply plugin: 'kotlin-kapt'
 
@@ -99,10 +100,15 @@ dependencies {
     //Unit Testing
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test:rules:1.4.0'
-    // Optional -- Hamcrerst Library
+
+    //Optional -- Homcrest Library
     androidTestImplementation 'org.hamcrest:hamcrest-library:1.3'
-    // Optional -- UI testing with Espresso
+
+    //Optional -- UI Testing with Espresso
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    // Optional -- UI testing with UI Automator
+
+    //Optional -- UI Testing with UI Automator
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+
+
 }

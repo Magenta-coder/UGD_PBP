@@ -66,7 +66,7 @@ class PDFActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
-//                        createPdf(nama, umur, tlp, alamat, obat)
+                        createPdf(nama, umur, tlp, alamat, obat)
                     }
                 }
             } catch (e: FileNotFoundException) {
