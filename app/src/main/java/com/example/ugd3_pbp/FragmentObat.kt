@@ -22,7 +22,7 @@ class FragmentSearch : Fragment() {
         val bind = FragmentObatBinding.inflate(layoutInflater)
 
         bind.floatingActionButton2.setOnClickListener {
-            val intent = Intent(this.requireContext(), TambahObat::class.java)
+            val intent = Intent(this.requireContext(), TambahEditObat::class.java)
             startActivity(intent)
         }
 

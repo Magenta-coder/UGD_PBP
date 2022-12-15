@@ -62,34 +62,34 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_jenis"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:hint="Jenis Obat">
 
-                <AutoCompleteTextView
-                    android:id="@+id/ed_jenis"
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"/>
+                    android:id="@+id/et_jenis" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_tipe"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:hint="Tipe">
+                android:hint="Tipe Obat">
 
-                <AutoCompleteTextView
-                    android:id="@+id/ed_tipe"
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"/>
+                    android:id="@+id/et_tipe" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>

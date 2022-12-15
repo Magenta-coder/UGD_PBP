@@ -12,24 +12,21 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.ugd3_pbp.api.ObatApi
+import com.example.ugd3_pbp.api.UserApi
 import com.example.ugd3_pbp.model.obat
+import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
+import io.github.muddz.styleabletoast.StyleableToast
+import org.json.JSONException
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
 class TambahEditObat : AppCompatActivity() {
-    companion object {
-        private val JENIS_LIST = arrayOf("Cair", "Tablet", "Kapsul", "Tetes","Suppositoria","Inhaler")
-        private val TIPE_LIST = arrayOf(
-            "Resep Dokter",
-            "Non-Resep Dokter",
-        )
-    }
 
-    private var etNama: EditText? = null
-    private var etKode: EditText? = null
-    private var edJenis: AutoCompleteTextView? = null
-    private var edTipe: AutoCompleteTextView? = null
+    private var etNama: TextInputEditText? = null
+    private var etKode: TextInputEditText? = null
+    private var edJenis: TextInputEditText? = null
+    private var edTipe: TextInputEditText? = null
     private var layoutLoading: LinearLayout? = null
     private var queue: RequestQueue? = null
 
@@ -37,42 +34,38 @@ class TambahEditObat : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tambah_edit_obat)
 
-        //Deklarasi request queue
+//        Deklarasi request queue
 
         queue = Volley.newRequestQueue(this)
         etNama = findViewById(R.id.et_nama)
         etKode = findViewById(R.id.et_kode)
-        edJenis = findViewById(R.id.ed_jenis)
-        edTipe= findViewById(R.id.ed_tipe)
+        edJenis = findViewById(R.id.et_jenis)
+        edTipe= findViewById(R.id.et_tipe)
         layoutLoading = findViewById(R.id.layout_loading)
 
-        setExposedDropDownMenu()
+//        setExposedDropDownMenu()
+
+        val namaObat = etNama!!.text.toString()
+        val kodeObat = etKode!!.text.toString()
+        val jenisObat = edJenis!!.text.toString()
+        val tipeObat = edTipe!!.text.toString()
 
         val btnCancel = findViewById<Button>(R.id.btn_cancel)
         btnCancel.setOnClickListener { finish() }
         val btnSave = findViewById<Button>(R.id.btn_save)
         val tvTitle = findViewById<TextView>(R.id.tv_title)
-        val id = intent.getLongExtra("id", -1)
-        if (id == -1L) {
+//        val id = intent.getLongExtra("id", -1)
+//        if (id == -1L) {
             tvTitle.setText("Tambah Obat")
-            btnSave.setOnClickListener { createObat() }
-        } else {
-            tvTitle.setText("Edit Obat")
-            getObatById(id)
-
-            btnSave.setOnClickListener { updateObat(id) }
-        }
+            btnSave.setOnClickListener { CreateObat(namaObat,kodeObat,jenisObat,tipeObat) }
+//        } else {
+//            tvTitle.setText("Edit Obat")
+//            getObatById(id)
+//
+//            btnSave.setOnClickListener { updateObat(id) }
+//        }
     }
 
-    fun setExposedDropDownMenu() {
-        val adapterJenis: ArrayAdapter<String> =
-            ArrayAdapter<String>(this, R.layout.list_obat, JENIS_LIST)
-        edJenis!!.setAdapter(adapterJenis)
-
-        val adapterTipe: ArrayAdapter<String> =
-            ArrayAdapter<String>(this, R.layout.list_obat, TIPE_LIST)
-        edTipe!!.setAdapter(adapterTipe)
-    }
 
     private fun getObatById(id: Long) {
         setLoading(true)
@@ -87,7 +80,6 @@ class TambahEditObat : AppCompatActivity() {
                     etKode!!.setText(obat.kode)
                     edJenis!!.setText(obat.jenis)
                     edTipe!!.setText(obat.tipe)
-                    setExposedDropDownMenu()
 
                     Toast.makeText(
                         this@TambahEditObat,
@@ -121,61 +113,45 @@ class TambahEditObat : AppCompatActivity() {
         queue!!.add(stringRequest)
     }
 
-    private fun createObat(){
-        setLoading(true)
-
-        val  mahasiswa = obat(
-            etNama!!.text.toString(),
-            etKode!!.text.toString(),
-            edJenis!!.text.toString(),
-            edTipe!!.text.toString(),
-        )
-
-        val stringRequest = object : StringRequest(Method.POST, ObatApi.ADD_URL, Response.Listener { response ->
-            val gson = Gson()
-            var obat = gson.fromJson(response, obat::class.java)
-
-            if(obat != null)
-                Toast.makeText(this@TambahEditObat, "Data Berhasil Ditambah", Toast.LENGTH_SHORT)
-                    .show()
-
-            val returnIntent = Intent()
-            setResult(RESULT_OK, returnIntent)
-            finish()
-
-            setLoading(false)
-        }, Response.ErrorListener { error ->
-            setLoading(false)
-            try {
-                val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
-                val errors = JSONObject(responseBody)
-                Toast.makeText(
-                    this@TambahEditObat,
-                    errors.getString("message" ),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }catch (e:Exception){
-                Toast.makeText(this@TambahEditObat, e.message, Toast.LENGTH_SHORT).show()
-            }
-        }) {
+    private fun CreateObat(nama: String, kode: String, jenis: String, tipe: String) {
+        val stringRequest: StringRequest = object : StringRequest(
+            Method.POST, ObatApi.ADD_URL,
+            Response.Listener { response ->
+                try {
+                    val jsonObject = JSONObject(response)
+                    val resp = jsonObject.getString("server_response")
+                    if (resp == "[{\"status\":\"OK\"}]") {
+//                            Toast.makeText(
+//                                applicationContext,
+//                                "Registrasi Berhasil",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                        val dashboardIntent = Intent(this@TambahEditObat, HomeActivity::class.java)
+//                        StyleableToast.makeText(applicationContext, "Tambah Obat Berhasil", Toast.LENGTH_SHORT, R.style.mytoast2).show()
+//                        startActivity(dashboardIntent)
+                        Toast.makeText(applicationContext, "Berhasil", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } else {
+                        Toast.makeText(applicationContext, resp, Toast.LENGTH_SHORT).show()
+//                            StyleableToast.makeText(applicationContext, "Tambah Obat Gagal, Coba Lagi", Toast.LENGTH_SHORT, R.style.mytoast).show()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            },
+            Response.ErrorListener { }) {
             @Throws(AuthFailureError::class)
-            override fun getHeaders(): Map<String, String> {
-                val headers = HashMap<String, String>()
-                headers["Accept"] = "applications/json"
-                return headers
-            }
-
-            @Throws(AuthFailureError::class)
-            override fun getBody(): ByteArray {
-                val gson = Gson()
-                val requestBody = gson.toJson(mahasiswa)
-                return requestBody.toByteArray(StandardCharsets.UTF_8)
-            }
-            override fun getBodyContentType(): String {
-                return "application/json"
+            override fun getParams(): Map<String, String>? {
+                val params: MutableMap<String, String> = java.util.HashMap()
+                params["nama"] = nama
+                params["kode"] = kode
+                params["jenis"] = jenis
+                params["tipe"] = tipe
+                return params
             }
         }
         queue!!.add(stringRequest)
+
     }
 
     private fun updateObat(id: Long){
